@@ -1,19 +1,21 @@
-import Cards from "./components/card/cards";
+import { useState } from "react";
+import { Card } from "./components";
 import { useFetchRepo } from "./hooks/useRepos";
+import { useRepoStore } from "./store/RepoStore";
 
 export default function App() {
-  const { data, isError, isLoading, error } = useFetchRepo("YnfanteY2799");
+  const [user, setUser] = useState("" as string);
 
-
-  if (isLoading) {
-    return <>isLoading</>;
-  }
+  const { data, isError, isLoading, error } = useFetchRepo(user);
+  const { favoriteReposId } = useRepoStore();
 
   return (
     <>
+      {isLoading ? <> loading</> : <></>}
+      <input onChange={({ target: { value } }) => setUser(value)} />
       {data?.map((repo) => (
-        <div>
-          <Cards repo={repo} />
+        <div key={repo.id}>
+          <Card repo={repo} isFav={favoriteReposId.includes(repo.id)} />
         </div>
       ))}
     </>
