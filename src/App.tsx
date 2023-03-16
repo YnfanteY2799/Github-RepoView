@@ -1,18 +1,19 @@
+import Cards from "./components/card/cards";
 import { useFetchRepo } from "./hooks/useRepos";
 
 export default function App() {
   const { data, isError, isLoading, error } = useFetchRepo("YnfanteY2799");
 
-  console.log(data);
 
   if (isLoading) {
     return <>isLoading</>;
   }
+
   return (
     <>
-      {data.map((repo) => (
+      {data?.map((repo) => (
         <div>
-          <h1>Repo</h1>
+          <Cards repo={repo} />
         </div>
       ))}
     </>
