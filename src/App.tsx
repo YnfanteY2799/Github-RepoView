@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card } from "./components";
+import { Card, Navbar } from "./components";
 import { useFetchRepo } from "./hooks/useRepos";
 import { useRepoStore } from "./store/RepoStore";
 
@@ -11,13 +11,14 @@ export default function App() {
 
   return (
     <>
-      {isLoading ? <> loading</> : <></>}
+      <Navbar />
+      {/* {isLoading ? <> loading</> : <></>}
       <input onChange={({ target: { value } }) => setUser(value)} />
       {data?.map((repo) => (
         <div key={repo.id}>
           <Card repo={repo} isFav={favoriteReposId.includes(repo.id)} />
         </div>
-      ))}
+      ))} */}
     </>
   );
 }
